@@ -1,29 +1,43 @@
 
 import javax.swing.JOptionPane;
 
-/* Búsqueda Secuencial */
+/* Búsqueda Binaria*/
 
 public class Busquedas {
 
     public static void main(String[] args) {
-        int arreglo[] = {4, 1, 5, 2, 3};
-        int dato;
-        boolean band= false;
-        
-        dato = Integer.parseInt(JOptionPane.showInputDialog("Digite un número a buscar: "));
-        // Búsqueda secuencial
-        int i=0;
-        while(i<5 && band == false) {
-            if(arreglo[i] == dato) {
+        int arreglo[] = {1,2,3,4,5};
+        int dato, inf, sup, mitad, i;
+        boolean band = false;
+
+        dato = Integer.parseInt(JOptionPane.showInputDialog("Digite el número a buscar: "));
+
+        // Búsqueda Binaria
+        inf = 0;
+        sup = 5;
+        i = 0;
+
+        mitad = (inf+sup)/2;
+        while(inf<=sup && i<5) {
+            if(arreglo[mitad] == dato) {
                 band = true;
+                break;
+            } 
+            if(arreglo[mitad] > dato) {
+                sup = mitad;
+                mitad = (inf+sup)/2;
+            }
+            if(arreglo[mitad] < dato) {
+                inf = mitad;
+                mitad = (inf+sup)/2;
             }
             i++;
         }
-        if(band == false) {
-            JOptionPane.showMessageDialog(null, "El número no se encuentra en el arreglo");
+        if(band == true) {
+            JOptionPane.showMessageDialog(null, "El número ha sido encontrado en la posición: "+mitad);
         }
         else {
-            JOptionPane.showMessageDialog(null, "El número se encuentra en la posición: "+(i-1));
+            JOptionPane.showMessageDialog(null, "No hemos encontrado el número en el arreglo.");
         }
     }
 }
